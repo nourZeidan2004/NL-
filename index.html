@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>L &amp; N | Our Memories</title>
+<style>
+:root{--navy:#101827;--ivory:#FAF7F2;--gold:#C6A76B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ivory);color:var(--navy);font:16px/1.6 system-ui,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 60px}
+h1{font:600 3.2rem Georgia,serif;color:var(--gold);text-align:center;margin:.2em 0 0}
+.sub{text-align:center;font-style:italic;margin:0 0 20px}
+nav{display:flex;gap:8px;justify-content:center;margin-bottom:24px}
+nav button{border:1px solid var(--gold);background:none;color:var(--navy);padding:9px 18px;border-radius:99px;font-size:15px;cursor:pointer}
+nav button.on{background:var(--navy);color:var(--ivory)}
+label{display:block;font-weight:600;margin:14px 0 4px}
+input,textarea{width:100%;padding:10px;border:1px solid var(--gold);border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:140px}
+.go{margin-top:18px;width:100%;background:var(--navy);color:var(--ivory);border:0;padding:13px;border-radius:99px;font-size:16px;cursor:pointer}
+.go:disabled{opacity:.5}
+.card{background:#fff;border:1px solid #C6A76B55;border-radius:16px;padding:18px;margin-bottom:16px}
+.card h2{font:600 1.5rem Georgia,serif;margin:0}
+.meta{font-size:14px;opacity:.65;margin:2px 0 8px}
+.card img{width:100%;border-radius:12px;margin:8px 0}
+.story{white-space:pre-wrap}
+.del{background:none;border:0;color:#9a5a52;cursor:pointer;padding:0;margin-top:8px;font-size:14px}
+.msg{text-align:center;min-height:1.4em}
+.empty{text-align:center;opacity:.7;padding:30px 0}
+.foot{text-align:center;font-size:13px;opacity:.6;margin-top:30px}
+.foot button{background:none;border:0;text-decoration:underline;cursor:pointer;color:inherit;font-size:inherit}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>L &amp; N</h1>
+  <p class="sub">Our story, one memory at a time.</p>
+
+  <section id="login" hidden>
+    <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+    <button class="go" id="in">Sign in</button>
+    <p class="msg" id="lmsg" role="alert" style="color:#9a5a52"></p>
+  </section>
+
+  <div id="app" hidden>
+    <nav>
+      <button id="t1" class="on">Add a memory</button>
+      <button id="t2">Our memories (<span id="count">0</span>)</button>
+    </nav>
+    <section id="p1">
+      <label for="title">Title</label><input id="title" placeholder="Our first coffee">
+      <label for="date">When</label><input id="date" type="date">
+      <label for="place">Where</label><input id="place" placeholder="Optional">
+      <label for="story">The memory</label><textarea id="story" placeholder="What happened? What do you want to remember?"></textarea>
+      <label for="photo">Photo (optional)</label><input id="photo" type="file" accept="image/*">
+      <button class="go" id="save">Save memory</button>
+      <p class="msg" id="msg" role="status"></p>
+    </section>
+    <section id="p2" hidden></section>
+    <p class="foot">Shared between both of you. <button id="out">Sign out</button></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js"></script>
+<script>
+/* ====== PASTE YOUR TWO VALUES HERE (from Supabase → Project Settings → API) ====== */
+const SUPABASE_URL = 'https://agboqeaxyszcftydkxfb.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Td9M2Rvi5uvzT0sOob7R3Q_PsLQiWSD';
+/* ================================================================================== */
+
+const $ = id => document.getElementById(id);
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let list = [];
+
+function say(el, text, ok) { el.style.color = ok ? '#2f6b3f' : '#9a5a52'; el.textContent = text; }
+function show(n) {
+  $('p1').hidden = n !== 1; $('p2').hidden = n !== 2;
+  $('t1').classList.toggle('on', n === 1); $('t2').classList.toggle('on', n === 2);
+  if (n === 2) render();
+}
+async function refresh() {
+  const { data, error } = await db.from('memories').select('*').order('date', { ascending: false }).order('id', { ascending: false });
+  if (error) { say($('msg'), 'Could not load memories: ' + error.message, false); return; }
+  list = data; $('count').textContent = list.length;
+  if (!$('p2').hidden) render();
+}
+function render() {
+  const box = $('p2'); box.innerHTML = '';
+  if (!list.length) { box.innerHTML = '<p class="empty">No memories yet. Add your first one.</p>'; return; }
+  list.forEach(m => {
+    const c = document.createElement('article'); c.className = 'card';
+    const h = document.createElement('h2'); h.textContent = m.title;
+    const meta = document.createElement('p'); meta.className = 'meta';
+    meta.textContent = new Date(m.date + 'T12:00').toLocaleDateString(undefined, { dateStyle: 'long' }) + (m.place ? ' • ' + m.place : '');
+    c.append(h, meta);
+    if (m.photo) { const i = document.createElement('img'); i.src = m.photo; i.alt = ''; c.append(i); }
+    const s = document.createElement('p'); s.className = 'story'; s.textContent = m.story; c.append(s);
+    const d = document.createElement('button'); d.className = 'del'; d.textContent = 'Delete';
+    d.onclick = async () => {
+      if (!confirm('Delete this memory for good? It disappears for both of you.')) return;
+      const { error } = await db.from('memories').delete().eq('id', m.id);
+      if (error) alert('Could not delete: ' + error.message); else refresh();
+    };
+    c.append(d); box.append(c);
+  });
+}
+function shrink(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader(); r.onerror = rej;
+    r.onload = () => { const im = new Image(); im.onerror = rej;
+      im.onload = () => { const k = Math.min(1, 800 / Math.max(im.width, im.height));
+        const c = document.createElement('canvas'); c.width = im.width * k; c.height = im.height * k;
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', .7)); };
+      im.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+$('save').onclick = async () => {
+  const title = $('title').value.trim(), story = $('story').value.trim(), date = $('date').value;
+  if (!title || !story || !date) return say($('msg'), 'Please add a title, a date and the memory.', false);
+  $('save').disabled = true;
+  let photo = null; const f = $('photo').files[0];
+  if (f) { try { photo = await shrink(f); } catch (e) { $('save').disabled = false; return say($('msg'), 'That photo could not be read.', false); } }
+  const { error } = await db.from('memories').insert({ title, date, place: $('place').value.trim() || null, story, photo });
+  $('save').disabled = false;
+  if (error) return say($('msg'), 'Not saved: ' + error.message, false);
+  ['title', 'place', 'story', 'photo'].forEach(i => $(i).value = '');
+  say($('msg'), 'Memory saved. It will appear on both phones.', true);
+  await refresh(); setTimeout(() => { $('msg').textContent = ''; show(2); }, 900);
+};
+$('in').onclick = async () => {
+  const { error } = await db.auth.signInWithPassword({ email: $('em').value.trim(), password: $('pw').value });
+  if (error) say($('lmsg'), 'Sign in failed: ' + error.message, false); else start();
+};
+$('out').onclick = async () => { await db.auth.signOut(); location.reload(); };
+$('t1').onclick = () => show(1); $('t2').onclick = () => show(2);
+
+async function start() {
+  const { data } = await db.auth.getSession();
+  if (!data.session) { $('login').hidden = false; $('app').hidden = true; return; }
+  $('login').hidden = true; $('app').hidden = false;
+  $('date').valueAsDate = new Date();
+  await refresh();
+  setInterval(refresh, 20000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+}
+if (SUPABASE_URL.startsWith('PASTE')) { $('login').hidden = false; say($('lmsg'), 'Setup needed: paste your Supabase URL and key at the top of the script in this file.', false); $('in').disabled = true; }
+else start();
+</script>
+</body>
+</html>
