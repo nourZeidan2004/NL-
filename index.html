@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffe3ee">
+<title>N &amp; L ;) | Our Memories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Shrikhand&display=swap" rel="stylesheet">
+<style>
+/* Scrapbook palette */
+:root{
+  --ink:#2b1b3d;      /* plum-black text + outlines */
+  --paper:#fffdf8;    /* card paper */
+  --blush:#ffe3ee;    /* page background */
+  --dot:#ffc2d9;     /* polka dots */
+  --pink:#d92b6c;     /* main buttons, title */
+  --bubble:#ff8db8;   /* shadows, hearts */
+  --butter:#ffd65c;   /* highlights, tape */
+  --mint:#8fe3c8;
+  --lilac:#c4b2ff;
+  --hand:'Caveat','Segoe Print','Bradley Hand',cursive;
+  --pop:'Shrikhand','Georgia',serif;
+  --ui:'Fredoka',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;color:var(--ink);font:400 17px/1.55 var(--ui);
+  background-color:var(--blush);
+  background-image:radial-gradient(var(--dot) 1.6px,transparent 1.7px);
+  background-size:24px 24px;
+  min-height:100vh;
+}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:28px 16px 70px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;text-align:center;margin-bottom:6px}
+h1{
+  font:400 clamp(3.8rem,19vw,5.6rem)/1 var(--pop);color:var(--pink);margin:.1em 0 0;
+  text-shadow:3px 3px 0 var(--butter),6px 6px 0 var(--ink);
+  letter-spacing:.02em;display:inline-block;
+  animation:drop .9s cubic-bezier(.3,1.5,.5,1) both;
+}
+.beat{position:absolute;top:-4px;right:calc(50% - 150px);font-size:2.2rem;display:inline-block;animation:beat 1.4s ease-in-out infinite;transform-origin:center}
+.sub{font:700 1.7rem/1.2 var(--hand);text-align:center;margin:10px 0 22px;color:var(--ink)}
+.sub span{background:linear-gradient(transparent 55%,var(--butter) 55%);padding:0 6px}
+@keyframes drop{0%{transform:translateY(-40px) rotate(-8deg) scale(.7);opacity:0}100%{transform:none;opacity:1}}
+@keyframes beat{0%,100%{transform:scale(1) rotate(10deg)}15%{transform:scale(1.25) rotate(10deg)}30%{transform:scale(1) rotate(10deg)}45%{transform:scale(1.18) rotate(10deg)}}
+
+/* ---------- tabs ---------- */
+nav{display:flex;gap:10px;justify-content:center;margin-bottom:26px;flex-wrap:wrap}
+nav button{
+  font:600 1rem var(--ui);color:var(--ink);background:var(--paper);
+  border:2px solid var(--ink);border-radius:99px;padding:9px 20px;cursor:pointer;
+  box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .12s;
+}
+nav button:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+nav button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+nav button.on{background:var(--butter)}
+
+/* ---------- forms ---------- */
+#p1,#login{
+  position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:22px;
+  padding:26px 20px 22px;box-shadow:7px 7px 0 var(--bubble);
+}
+#p1::before,#login::before,.card::before{
+  content:"";position:absolute;top:-13px;left:50%;width:96px;height:26px;margin-left:-48px;
+  background:repeating-linear-gradient(45deg,rgba(255,214,92,.9) 0 8px,rgba(255,236,160,.9) 8px 16px);
+  transform:rotate(-3deg);box-shadow:0 1px 3px rgba(43,27,61,.2);
+}
+label{display:block;font-weight:600;margin:16px 0 5px}
+label:first-child{margin-top:0}
+input,textarea{
+  width:100%;padding:11px 13px;border:2px solid var(--ink);border-radius:14px;
+  font:inherit;color:var(--ink);background:#fff;transition:box-shadow .15s,transform .15s;
+}
+input::placeholder,textarea::placeholder{color:#8f7da3}
+input:focus,textarea:focus{outline:3px solid var(--lilac);outline-offset:2px;box-shadow:4px 4px 0 var(--bubble)}
+textarea{min-height:150px;resize:vertical}
+input[type=file]{padding:10px;border-style:dashed;background:#fff7fb;cursor:pointer}
+input[type=file]::file-selector-button{
+  font:600 .95rem var(--ui);margin-right:12px;padding:7px 14px;border:2px solid var(--ink);
+  border-radius:99px;background:var(--mint);color:var(--ink);cursor:pointer;
+}
+.preview{display:block;max-height:190px;max-width:100%;margin:12px auto 0;border:8px solid #fff;border-radius:4px;box-shadow:0 2px 10px rgba(43,27,61,.3);transform:rotate(-2deg)}
+.go{
+  margin-top:22px;width:100%;background:var(--pink);color:#fff;font:700 1.1rem var(--ui);
+  border:2px solid var(--ink);padding:13px;border-radius:99px;cursor:pointer;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;
+}
+.go:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.go:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.go:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:4px 4px 0 var(--ink)}
+.msg{text-align:center;min-height:1.5em;margin:14px 0 0;font-weight:500}
+button:focus-visible{outline:3px solid var(--lilac);outline-offset:3px}
+
+/* ---------- memory cards ---------- */
+#p2{padding-top:10px}
+.card{
+  --shade:var(--bubble);--tilt:-.7deg;
+  position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:20px;
+  padding:26px 20px 16px;margin:0 0 40px;box-shadow:6px 6px 0 var(--shade);transform:rotate(var(--tilt));
+  transition:transform .2s;
+}
+.card:nth-child(4n+2){--shade:var(--butter);--tilt:.8deg}
+.card:nth-child(4n+3){--shade:var(--mint);--tilt:-.5deg}
+.card:nth-child(4n){--shade:var(--lilac);--tilt:.6deg}
+.card:hover{transform:rotate(0) translateY(-3px)}
+.sticker{
+  position:absolute;top:-20px;right:-8px;width:50px;height:50px;border-radius:50%;
+  display:grid;place-items:center;font-size:1.6rem;background:var(--butter);
+  border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);transform:rotate(12deg);
+}
+.card h2{font:700 1.55rem/1.2 var(--ui);margin:0;padding-right:34px}
+.meta{font:700 1.35rem/1.2 var(--hand);color:var(--pink);margin:6px 0 4px}
+.ago{
+  display:inline-block;font:600 .8rem var(--ui);background:var(--mint);border:1.5px solid var(--ink);
+  border-radius:99px;padding:1px 10px;margin:2px 0 8px;
+}
+.card img{display:block;width:100%;border:9px solid #fff;border-bottom-width:22px;border-radius:4px;margin:10px 0 12px;box-shadow:0 3px 12px rgba(43,27,61,.3);transform:rotate(-1.2deg)}
+.card:nth-child(even) img{transform:rotate(1.2deg)}
+.story{white-space:pre-wrap;margin:6px 0 0}
+.del{background:none;border:0;color:#a2453d;cursor:pointer;padding:4px 0;margin-top:10px;font:500 .9rem var(--ui);text-decoration:underline;text-underline-offset:3px}
+.empty{text-align:center;padding:34px 10px;font-size:1.15rem}
+.empty b{display:block;font-size:3.2rem;line-height:1;margin-bottom:8px;animation:beat 1.6s ease-in-out infinite}
+
+.foot{text-align:center;font:700 1.3rem var(--hand);margin-top:34px}
+.foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:inherit;font:inherit}
+[hidden]{display:none!important}
+
+/* ---------- floating hearts + save burst ---------- */
+.float{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.float i{position:absolute;bottom:-60px;font-style:normal;opacity:.55;animation:rise linear infinite}
+@keyframes rise{0%{transform:translate(0,0) rotate(-10deg)}50%{transform:translate(24px,-55vh) rotate(10deg)}100%{transform:translate(-10px,-115vh) rotate(-10deg)}}
+.pop{position:fixed;z-index:50;pointer-events:none;font-size:1.5rem;animation:pop .95s ease-out forwards}
+@keyframes pop{0%{transform:translate(0,0) scale(.4);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(var(--rot));opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .float{display:none}
+  *{animation:none!important;transition:none!important}
+}
+@media (max-width:420px){
+  .beat{right:6px}
+  .card{padding:24px 16px 14px}
+}
+</style>
+</head>
+<body>
+<div class="float" id="float" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="hero">
+    <h1>N &amp; L</h1><span class="beat" aria-hidden="true">💗</span>
+  </div>
+  <p class="sub"><span>Our story, one memory at a time.</span></p>
+
+  <section id="login" hidden>
+    <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+    <button class="go" id="in">Sign in</button>
+    <p class="msg" id="lmsg" role="alert" style="color:#9a5a52"></p>
+  </section>
+
+  <div id="app" hidden>
+    <nav>
+      <button id="t1" class="on">✏️ Add a memory</button>
+      <button id="t2">💌 Our memories (<span id="count">0</span>)</button>
+    </nav>
+    <section id="p1">
+      <label for="title">Title</label><input id="title" placeholder="Our first coffee">
+      <label for="date">When</label><input id="date" type="date">
+      <label for="place">Where</label><input id="place" placeholder="Optional">
+      <label for="story">The memory</label><textarea id="story" placeholder="What happened? What do you want to remember?"></textarea>
+      <label for="photo">Photo (optional)</label><input id="photo" type="file" accept="image/*">
+      <img id="preview" class="preview" alt="Selected photo preview" hidden>
+      <button class="go" id="save">Save memory</button>
+      <p class="msg" id="msg" role="status"></p>
+    </section>
+    <section id="p2" hidden></section>
+    <p class="foot">Shared between you and me · <button id="out">Sign out</button></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js"></script>
+<script>
+/* ====== PASTE YOUR TWO VALUES HERE (from Supabase → Project Settings → API) ====== */
+const SUPABASE_URL = 'https://agboqeaxyszcftydkxfb.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Td9M2Rvi5uvzT0sOob7R3Q_PsLQiWSD';
+/* ================================================================================== */
+
+const $ = id => document.getElementById(id);
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let list = [];
+
+/* ---------- small fun helpers (design only) ---------- */
+const STICKERS = ['💖', '🌸', '☕', '✨', '🌙', '🎈', '🍓', '🎶', '🌈', '🧸'];
+function stickerFor(id) {
+  let n = 0; String(id).split('').forEach(ch => n += ch.charCodeAt(0));
+  return STICKERS[n % STICKERS.length];
+}
+function ago(dateStr) {
+  const days = Math.round((new Date().setHours(12, 0, 0, 0) - new Date(dateStr + 'T12:00')) / 86400000);
+  if (days < 0) return 'coming up!';
+  if (days === 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 30) return days + ' days ago';
+  if (days < 365) { const m = Math.round(days / 30); return m + (m === 1 ? ' month ago' : ' months ago'); }
+  const y = Math.floor(days / 365); return y + (y === 1 ? ' year ago' : ' years ago');
+}
+function burst(el) {
+  const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const set = ['💖', '💗', '✨', '💕', '🌸'];
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('span'); s.className = 'pop';
+    s.textContent = set[i % set.length]; s.style.left = cx + 'px'; s.style.top = cy + 'px';
+    const a = Math.random() * Math.PI * 2, d = 70 + Math.random() * 110;
+    s.style.setProperty('--dx', Math.cos(a) * d + 'px'); s.style.setProperty('--dy', Math.sin(a) * d - 30 + 'px');
+    s.style.setProperty('--rot', (Math.random() * 80 - 40) + 'deg');
+    document.body.append(s); s.addEventListener('animationend', () => s.remove());
+  }
+}
+(function hearts() {
+  const box = $('float'), set = ['💗', '💖', '💕', '✨', '🌸'];
+  for (let i = 0; i < 12; i++) {
+    const h = document.createElement('i'); h.textContent = set[i % set.length];
+    h.style.left = (4 + Math.random() * 92) + '%'; h.style.fontSize = (14 + Math.random() * 20) + 'px';
+    h.style.animationDuration = (16 + Math.random() * 14) + 's'; h.style.animationDelay = (-Math.random() * 20) + 's';
+    box.append(h);
+  }
+})();
+$('photo').onchange = () => {
+  const f = $('photo').files[0], p = $('preview');
+  if (p.src && p.src.startsWith('blob:')) URL.revokeObjectURL(p.src);
+  if (f) { p.src = URL.createObjectURL(f); p.hidden = false; } else { p.removeAttribute('src'); p.hidden = true; }
+};
+
+/* ---------- app logic (unchanged behaviour) ---------- */
+function say(el, text, ok) { el.style.color = ok ? '#2f6b3f' : '#9a5a52'; el.textContent = text; }
+function show(n) {
+  $('p1').hidden = n !== 1; $('p2').hidden = n !== 2;
+  $('t1').classList.toggle('on', n === 1); $('t2').classList.toggle('on', n === 2);
+  if (n === 2) render();
+}
+async function refresh() {
+  const { data, error } = await db.from('memories').select('*').order('date', { ascending: false }).order('id', { ascending: false });
+  if (error) { say($('msg'), 'Could not load memories: ' + error.message, false); return; }
+  list = data; $('count').textContent = list.length;
+  if (!$('p2').hidden) render();
+}
+function render() {
+  const box = $('p2'); box.innerHTML = '';
+  if (!list.length) { box.innerHTML = '<p class="empty"><b>💌</b>No memories yet. Add your first one.</p>'; return; }
+  list.forEach(m => {
+    const c = document.createElement('article'); c.className = 'card';
+    const st = document.createElement('div'); st.className = 'sticker'; st.setAttribute('aria-hidden', 'true'); st.textContent = stickerFor(m.id);
+    const h = document.createElement('h2'); h.textContent = m.title;
+    const meta = document.createElement('p'); meta.className = 'meta';
+    meta.textContent = new Date(m.date + 'T12:00').toLocaleDateString(undefined, { dateStyle: 'long' }) + (m.place ? ' • ' + m.place : '');
+    const when = document.createElement('span'); when.className = 'ago'; when.textContent = ago(m.date);
+    c.append(st, h, meta, when);
+    if (m.photo) { const i = document.createElement('img'); i.src = m.photo; i.alt = m.title; c.append(i); }
+    const s = document.createElement('p'); s.className = 'story'; s.textContent = m.story; c.append(s);
+    const d = document.createElement('button'); d.className = 'del'; d.textContent = 'Delete';
+    d.onclick = async () => {
+      if (!confirm('Delete this memory for good? It disappears for both of you.')) return;
+      const { error } = await db.from('memories').delete().eq('id', m.id);
+      if (error) alert('Could not delete: ' + error.message); else refresh();
+    };
+    c.append(d); box.append(c);
+  });
+}
+function shrink(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader(); r.onerror = rej;
+    r.onload = () => { const im = new Image(); im.onerror = rej;
+      im.onload = () => { const k = Math.min(1, 800 / Math.max(im.width, im.height));
+        const c = document.createElement('canvas'); c.width = im.width * k; c.height = im.height * k;
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', .7)); };
+      im.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+$('save').onclick = async () => {
+  const title = $('title').value.trim(), story = $('story').value.trim(), date = $('date').value;
+  if (!title || !story || !date) return say($('msg'), 'Please add a title, a date and the memory.', false);
+  $('save').disabled = true;
+  let photo = null; const f = $('photo').files[0];
+  if (f) { try { photo = await shrink(f); } catch (e) { $('save').disabled = false; return say($('msg'), 'That photo could not be read.', false); } }
+  const { error } = await db.from('memories').insert({ title, date, place: $('place').value.trim() || null, story, photo });
+  $('save').disabled = false;
+  if (error) return say($('msg'), 'Not saved: ' + error.message, false);
+  ['title', 'place', 'story', 'photo'].forEach(i => $(i).value = '');
+  $('photo').onchange();
+  burst($('save'));
+  say($('msg'), 'Memory saved. It will appear on both phones.', true);
+  await refresh(); setTimeout(() => { $('msg').textContent = ''; show(2); }, 1100);
+};
+$('in').onclick = async () => {
+  const { error } = await db.auth.signInWithPassword({ email: $('em').value.trim(), password: $('pw').value });
+  if (error) say($('lmsg'), 'Sign in failed: ' + error.message, false); else start();
+};
+$('out').onclick = async () => {
+  try { await db.auth.signOut({ scope: 'local' }); } catch (e) {}
+  try { Object.keys(localStorage).filter(k => k.startsWith('sb-')).forEach(k => localStorage.removeItem(k)); } catch (e) {}
+  location.reload();
+};
+$('t1').onclick = () => show(1); $('t2').onclick = () => show(2);
+
+async function start() {
+  const { data } = await db.auth.getSession();
+  if (!data.session) { $('login').hidden = false; $('app').hidden = true; return; }
+  $('login').hidden = true; $('app').hidden = false;
+  $('date').valueAsDate = new Date();
+  await refresh();
+  setInterval(refresh, 20000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+}
+if (SUPABASE_URL.startsWith('PASTE')) { $('login').hidden = false; say($('lmsg'), 'Setup needed: paste your Supabase URL and key at the top of the script in this file.', false); $('in').disabled = true; }
+else start();
+</script>
+</body>
+</html>
