@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#800020">
+<title>N &amp; L ;) | Our Memories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Burgundy palette: wine ink, blush-white page, rose + muted-gold accents */
+:root{
+  --plum:#2b1117; --muted:#7d6068; --bg:#fbf5f4; --line:#ecd5d8; --white:#fff;
+  --blush:#f6d6dc; --peach:#f3c9b8; --lilac:#e3b9c6; --butter:#ecd596; --mint:#eadbc4; --sky:#d7b8c9;
+  --coral:#800020; --coral-d:#5a0016; --cream:#fff1dc; --gold:#c5a253;
+  --display:'Fredoka','Trebuchet MS',system-ui,sans-serif;
+  --body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--plum);font:400 16.5px/1.6 var(--body)}
+[hidden]{display:none!important}
+.wrap{max-width:620px;margin:0 auto;padding:26px 16px 130px}
+
+/* ================= HERO: a chat between two people ================= */
+.hero{position:relative;background:var(--coral);color:#fff;border-radius:0 0 46px 46px;padding:36px 16px 30px;overflow:hidden;text-align:center}
+.hero::before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:var(--coral-d);left:-40px;top:54px}
+.hero::after{content:"";position:absolute;width:84px;height:84px;border-radius:50%;background:var(--gold);right:-26px;top:18px}
+.hero-in{position:relative;z-index:1;max-width:620px;margin:0 auto}
+h1{margin:0;display:flex;justify-content:center;position:relative;width:max-content;margin-inline:auto}
+.av{
+  --r:-6deg;width:90px;height:90px;border-radius:50%;display:grid;place-items:center;cursor:pointer;user-select:none;
+  background:var(--cream);color:var(--coral);font:700 2.9rem/1 var(--display);border:5px solid #fff;
+  box-shadow:0 8px 0 rgba(0,0,0,.28);transform:rotate(var(--r));
+  animation:avin .8s cubic-bezier(.3,1.6,.5,1) backwards;transition:transform .15s;
+}
+.av+.av{--r:5deg;margin-left:-18px;background:var(--blush);animation-delay:.15s}
+.av:active,.av.hop{transform:translateY(-8px) rotate(var(--r)) scale(1.06)}
+.wink{color:var(--coral);position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);z-index:2;width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:1.4rem;box-shadow:0 4px 10px rgba(0,0,0,.3);animation:avin .8s .35s cubic-bezier(.3,1.6,.5,1) backwards}
+@keyframes avin{0%{transform:translateY(-50px) rotate(calc(var(--r,0deg)*3)) scale(.6);opacity:0}100%{opacity:1}}
+
+.chat{display:grid;justify-items:center;margin-top:30px;min-height:54px}
+.typing,.said{grid-area:1/1;align-self:center}
+.typing{display:flex;gap:5px;background:#fff;padding:15px 19px;border-radius:22px 22px 22px 6px;box-shadow:0 4px 10px rgba(0,0,0,.25);animation:typing 2.1s forwards}
+.typing i{width:8px;height:8px;border-radius:50%;background:#c28a98;animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:none}30%{transform:translateY(-6px)}}
+@keyframes typing{0%,82%{opacity:1;transform:none}100%{opacity:0;transform:scale(.6);visibility:hidden}}
+.said{max-width:92%;background:var(--cream);color:var(--coral);font:600 1.05rem/1.4 var(--body);padding:11px 18px;border-radius:22px 22px 6px 22px;box-shadow:0 5px 12px rgba(0,0,0,.28);animation:pop .55s 1.9s cubic-bezier(.3,1.6,.5,1) backwards}
+@keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:none;opacity:1}}
+.stats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px;min-height:30px}
+.stat{font:700 .85rem var(--body);padding:4px 13px;border-radius:99px;background:rgba(255,255,255,.15);color:#fff}
+.stat i{font-style:normal;color:var(--butter)}
+
+/* ================= DOCK ================= */
+nav{position:fixed;z-index:20;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:4px;padding:6px;background:var(--coral);border-radius:24px;box-shadow:0 12px 30px rgba(90,0,22,.45);max-width:calc(100% - 24px)}
+nav button{font:700 .98rem var(--body);color:#f6d6dc;background:none;border:0;border-radius:18px;padding:11px 18px;cursor:pointer;white-space:nowrap;transition:background .15s}
+nav button:hover{background:rgba(255,255,255,.12)}
+nav button.on{background:var(--cream);color:var(--coral)}
+button:focus-visible,.av:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+nav button:focus-visible{outline-color:#fff;outline-offset:-3px}
+
+/* ================= FORMS ================= */
+#p1,#login{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:22px 20px;box-shadow:0 16px 32px -20px rgba(90,0,22,.35)}
+#login{margin-top:6px}
+label{display:block;font-weight:700;font-size:.95rem;margin:16px 0 5px}
+#p1>label:first-child,#login>label:first-child{margin-top:0}
+input,textarea{width:100%;padding:11px 14px;border:2px solid #ead0d4;border-radius:16px;background:#fffdfc;font:inherit;color:var(--plum);transition:border-color .15s,box-shadow .15s}
+input::placeholder,textarea::placeholder{color:#a98a92}
+input:focus,textarea:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 4px rgba(128,0,32,.16)}
+textarea{min-height:150px;resize:vertical}
+input[type=file]{padding:9px;border-style:dashed;background:#fff4f4;cursor:pointer}
+input[type=file]::file-selector-button{font:700 .92rem var(--body);margin-right:12px;padding:7px 14px;border:0;border-radius:99px;background:var(--butter);color:var(--plum);cursor:pointer}
+.preview{display:block;max-height:200px;max-width:100%;margin:14px auto 0;border:7px solid #fff;border-radius:4px;box-shadow:0 4px 14px rgba(43,17,23,.28);transform:rotate(-2deg)}
+.go{margin-top:22px;width:100%;background:var(--coral);color:#fff;border:0;border-radius:99px;padding:14px;font:700 1.08rem var(--body);cursor:pointer;box-shadow:0 5px 0 var(--coral-d);transition:transform .1s,box-shadow .1s}
+.go:active{transform:translateY(4px);box-shadow:0 1px 0 var(--coral-d)}
+.go:disabled{opacity:.55;cursor:not-allowed}
+.msg{text-align:center;min-height:1.5em;margin:14px 0 0;font-weight:600}
+
+/* ================= TIMELINE ================= */
+.tools{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.tools h2{font:700 1.3rem var(--display);margin:0}
+.surprise{white-space:nowrap;flex:none;font:700 .92rem var(--body);background:#fff;color:var(--plum);border:2px solid var(--plum);border-radius:99px;padding:7px 15px;cursor:pointer;box-shadow:0 3px 0 var(--plum);transition:transform .1s,box-shadow .1s}
+.surprise:active{transform:translateY(3px);box-shadow:none}
+.otd{display:block;width:100%;text-align:left;cursor:pointer;background:var(--butter);color:var(--plum);border:0;border-radius:22px 22px 22px 6px;padding:13px 18px;margin-bottom:16px;font:inherit}
+.otd small{display:block;font:700 .82rem var(--body)}
+.otd b{font:700 1.2rem var(--display)}
+.tl{position:relative;padding-left:30px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:0;width:3px;background:repeating-linear-gradient(#dcb3bd 0 8px,transparent 8px 14px)}
+.month{position:relative;display:flex;align-items:center;gap:10px;margin:26px 0 12px -30px;font:600 1rem var(--display)}
+.month:first-child{margin-top:4px}
+.month span{background:var(--c);padding:4px 16px;border-radius:99px}
+.month small{font:600 .85rem var(--body);color:var(--muted)}
+.card{--c:var(--peach);position:relative;background:var(--white);border:1px solid var(--line);border-radius:24px 24px 24px 8px;padding:16px;margin-bottom:16px;scroll-margin-top:16px}
+.card::before{content:"";position:absolute;left:-30px;top:27px;width:19px;height:19px;border-radius:50%;background:var(--c);border:3px solid var(--plum)}
+.card.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 0 var(--c)}30%{box-shadow:0 0 0 8px var(--c)}100%{box-shadow:0 0 0 0 transparent}}
+.top{display:flex;gap:14px;align-items:center}
+.tile{flex:none;width:66px;height:70px;border-radius:20px;background:var(--c);color:var(--plum);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.tile b{font:700 1.9rem var(--display)}
+.tile span{font:700 .78rem var(--body);margin-top:4px}
+.head{min-width:0}
+.head h3{font:600 1.3rem/1.2 var(--display);margin:0;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.chip{font:600 .8rem var(--body);padding:2px 10px;border-radius:99px;background:#f8ebed}
+.chip.when{background:var(--c);background:color-mix(in srgb,var(--c) 55%,#fff)}
+.card img{display:block;width:calc(100% - 14px);margin:16px auto 6px;border:8px solid #fff;border-radius:4px;box-shadow:0 5px 16px rgba(43,17,23,.26),0 0 0 1px var(--line);transform:rotate(-1.2deg)}
+.card:nth-of-type(even) img{transform:rotate(1.2deg)}
+.story{white-space:pre-wrap;margin:12px 0 0}
+.del{background:none;border:0;color:var(--muted);cursor:pointer;padding:4px 0;margin-top:8px;font:600 .88rem var(--body);text-decoration:underline;text-underline-offset:3px}
+.del:hover{color:#b3261e}
+.empty{text-align:center;padding:42px 10px;color:var(--muted)}
+.empty b{display:block;font-size:3rem;line-height:1;margin-bottom:10px}
+.foot{text-align:center;font-size:.9rem;color:var(--muted);margin-top:30px}
+.foot button{background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:inherit;font:inherit}
+
+/* emoji pop on save / avatar tap */
+.bit{position:fixed;z-index:50;pointer-events:none;font-size:1.5rem;animation:bit 1.1s ease-out forwards}
+@keyframes bit{0%{transform:translate(0,0) rotate(0) scale(.5);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(1.2);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.typing{display:none}}
+@media (max-width:420px){.av{width:78px;height:78px;font-size:2.5rem}.hero{border-radius:0 0 36px 36px}.tile{width:60px;height:64px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-in">
+    <h1 aria-label="N and L">
+      <span class="av" aria-hidden="true">N</span><span class="av" aria-hidden="true">L</span><span class="wink" aria-hidden="true">😉</span>
+    </h1>
+    <div class="chat">
+      <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="said" style="margin:0">Little moments we don't want to forget ;)</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section id="login" hidden>
+    <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+    <button class="go" id="in">Sign in</button>
+    <p class="msg" id="lmsg" role="alert" style="color:#9a5a52"></p>
+  </section>
+
+  <div id="app" hidden>
+    <nav aria-label="Sections">
+      <button id="t1" class="on">Add a memory</button>
+      <button id="t2">Our memories (<span id="count">0</span>)</button>
+    </nav>
+    <section id="p1">
+      <label for="title">Title</label><input id="title" placeholder="That time we…">
+      <label for="date">When</label><input id="date" type="date">
+      <label for="place">Where</label><input id="place" placeholder="Optional">
+      <label for="story">The memory</label><textarea id="story" placeholder="What happened? What made you smile?"></textarea>
+      <label for="photo">Photo (optional)</label><input id="photo" type="file" accept="image/*">
+      <img id="preview" class="preview" alt="Selected photo preview" hidden>
+      <button class="go" id="save">Save memory</button>
+      <p class="msg" id="msg" role="status"></p>
+    </section>
+    <section id="p2" hidden></section>
+    <p class="foot">Shared between you and me · <button id="out">Sign out</button></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js"></script>
+<script>
+/* ====== PASTE YOUR TWO VALUES HERE (from Supabase → Project Settings → API) ====== */
+const SUPABASE_URL = 'https://agboqeaxyszcftydkxfb.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Td9M2Rvi5uvzT0sOob7R3Q_PsLQiWSD';
+/* ================================================================================== */
+
+const $ = id => document.getElementById(id);
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let list = [];
+let cardEls = {};
+
+/* ---------- design helpers ---------- */
+const MONTH_COLORS = ['var(--peach)', 'var(--blush)', 'var(--lilac)', 'var(--butter)', 'var(--mint)', 'var(--sky)'];
+const POPS = ['🦋', '✨', '💗', '😳', '🌸', '😉'];
+const dayDiff = s => Math.round((new Date().setHours(12, 0, 0, 0) - new Date(s + 'T12:00')) / 86400000);
+function ago(s) {
+  const days = dayDiff(s);
+  if (days < 0) return 'coming up!';
+  if (days === 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 30) return days + ' days ago';
+  if (days < 365) { const m = Math.round(days / 30); return m + (m === 1 ? ' month ago' : ' months ago'); }
+  const y = Math.floor(days / 365); return y + (y === 1 ? ' year ago' : ' years ago');
+}
+function pop(el, n) {
+  const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  for (let i = 0; i < n; i++) {
+    const b = document.createElement('span'); b.className = 'bit'; b.setAttribute('aria-hidden', 'true');
+    b.textContent = POPS[i % POPS.length]; b.style.left = cx + 'px'; b.style.top = cy + 'px';
+    const a = -Math.PI * Math.random(), d = 70 + Math.random() * 120;
+    b.style.setProperty('--dx', Math.cos(a) * d + 'px'); b.style.setProperty('--dy', Math.sin(a) * d + 30 + 'px');
+    b.style.setProperty('--rot', (Math.random() * 120 - 60) + 'deg');
+    document.body.append(b); b.addEventListener('animationend', () => b.remove());
+  }
+}
+function jumpTo(id) {
+  const el = cardEls[id]; if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+}
+function updateStats() {
+  const box = $('stats'); box.innerHTML = '';
+  if (!list.length) return;
+  const sorted = [...list].sort((a, b) => a.date < b.date ? -1 : 1);
+  const first = new Date(sorted[0].date + 'T12:00').toLocaleDateString(undefined, { month: 'short', year: 'numeric' });
+  [[list.length, list.length === 1 ? 'memory' : 'memories'], ['since', first], ['latest', ago(sorted[sorted.length - 1].date)]].forEach(([a, b]) => {
+    const s = document.createElement('span'); s.className = 'stat';
+    const i = document.createElement('i'); i.textContent = a; s.append(i, ' ' + b); box.append(s);
+  });
+}
+document.querySelectorAll('.av').forEach(k => k.addEventListener('click', () => {
+  k.classList.add('hop'); setTimeout(() => k.classList.remove('hop'), 180); pop(k, 4);
+}));
+$('photo').onchange = () => {
+  const f = $('photo').files[0], p = $('preview');
+  if (p.src && p.src.startsWith('blob:')) URL.revokeObjectURL(p.src);
+  if (f) { p.src = URL.createObjectURL(f); p.hidden = false; } else { p.removeAttribute('src'); p.hidden = true; }
+};
+
+/* ---------- app logic (unchanged behaviour) ---------- */
+function say(el, text, ok) { el.style.color = ok ? '#2f6b3f' : '#9a5a52'; el.textContent = text; }
+function show(n) {
+  $('p1').hidden = n !== 1; $('p2').hidden = n !== 2;
+  $('t1').classList.toggle('on', n === 1); $('t2').classList.toggle('on', n === 2);
+  if (n === 2) render();
+  window.scrollTo({ top: 0 });
+}
+async function refresh() {
+  const { data, error } = await db.from('memories').select('*').order('date', { ascending: false }).order('id', { ascending: false });
+  if (error) { say($('msg'), 'Could not load memories: ' + error.message, false); return; }
+  list = data; $('count').textContent = list.length; updateStats();
+  if (!$('p2').hidden) render();
+}
+function render() {
+  const box = $('p2'); box.innerHTML = ''; cardEls = {};
+  if (!list.length) { box.innerHTML = '<p class="empty"><b>🦋</b>Nothing here yet. Go make a memory.</p>'; return; }
+
+  const tools = document.createElement('div'); tools.className = 'tools';
+  const t = document.createElement('h2'); t.textContent = 'Our little moments';
+  const sp = document.createElement('button'); sp.className = 'surprise'; sp.textContent = '✨ Surprise me';
+  sp.onclick = () => jumpTo(list[Math.floor(Math.random() * list.length)].id);
+  tools.append(t, sp); box.append(tools);
+
+  const now = new Date(), md = (now.getMonth() + 1) + '-' + now.getDate();
+  list.filter(m => { const d = new Date(m.date + 'T12:00'); return d.getFullYear() < now.getFullYear() && (d.getMonth() + 1) + '-' + d.getDate() === md; })
+    .forEach(m => {
+      const o = document.createElement('button'); o.className = 'otd';
+      const sm = document.createElement('small'); const y = now.getFullYear() - new Date(m.date + 'T12:00').getFullYear();
+      sm.textContent = 'On this day · ' + y + (y === 1 ? ' year ago' : ' years ago') + ' 👀';
+      const b = document.createElement('b'); b.textContent = m.title; o.append(sm, b); o.onclick = () => jumpTo(m.id); box.append(o);
+    });
+
+  const counts = {}; list.forEach(m => { const k = m.date.slice(0, 7); counts[k] = (counts[k] || 0) + 1; });
+  const tl = document.createElement('div'); tl.className = 'tl'; box.append(tl);
+  let lastKey = '';
+  list.forEach(m => {
+    const key = m.date.slice(0, 7), dt = new Date(m.date + 'T12:00');
+    const col = MONTH_COLORS[dt.getMonth() % MONTH_COLORS.length];
+    if (key !== lastKey) {
+      lastKey = key;
+      const mh = document.createElement('h3'); mh.className = 'month'; mh.style.setProperty('--c', col);
+      const pill = document.createElement('span'); pill.textContent = new Date(key + '-15T12:00').toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+      const sm = document.createElement('small'); sm.textContent = counts[key] + (counts[key] === 1 ? ' memory' : ' memories');
+      mh.append(pill, sm); tl.append(mh);
+    }
+    const c = document.createElement('article'); c.className = 'card'; c.style.setProperty('--c', col); cardEls[m.id] = c;
+    const top = document.createElement('div'); top.className = 'top';
+    const tile = document.createElement('time'); tile.className = 'tile'; tile.dateTime = m.date;
+    tile.setAttribute('aria-label', dt.toLocaleDateString(undefined, { dateStyle: 'long' }));
+    const day = document.createElement('b'); day.textContent = dt.getDate();
+    const mon = document.createElement('span'); mon.textContent = dt.toLocaleDateString(undefined, { month: 'short' });
+    tile.append(day, mon);
+    const head = document.createElement('div'); head.className = 'head';
+    const h = document.createElement('h3'); h.textContent = m.title;
+    const chips = document.createElement('div'); chips.className = 'chips';
+    if (m.place) { const p = document.createElement('span'); p.className = 'chip'; p.textContent = '📍 ' + m.place; chips.append(p); }
+    const w = document.createElement('span'); w.className = 'chip when'; w.textContent = ago(m.date); chips.append(w);
+    head.append(h, chips); top.append(tile, head); c.append(top);
+    if (m.photo) { const i = document.createElement('img'); i.src = m.photo; i.alt = m.title; c.append(i); }
+    const s = document.createElement('p'); s.className = 'story'; s.textContent = m.story; c.append(s);
+    const d = document.createElement('button'); d.className = 'del'; d.textContent = 'Delete';
+    d.onclick = async () => {
+      if (!confirm('Delete this memory for good? It disappears for both of you.')) return;
+      const { error } = await db.from('memories').delete().eq('id', m.id);
+      if (error) alert('Could not delete: ' + error.message); else refresh();
+    };
+    c.append(d); tl.append(c);
+  });
+}
+function shrink(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader(); r.onerror = rej;
+    r.onload = () => { const im = new Image(); im.onerror = rej;
+      im.onload = () => { const k = Math.min(1, 800 / Math.max(im.width, im.height));
+        const c = document.createElement('canvas'); c.width = im.width * k; c.height = im.height * k;
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', .7)); };
+      im.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+$('save').onclick = async () => {
+  const title = $('title').value.trim(), story = $('story').value.trim(), date = $('date').value;
+  if (!title || !story || !date) return say($('msg'), 'Please add a title, a date and the memory.', false);
+  $('save').disabled = true;
+  let photo = null; const f = $('photo').files[0];
+  if (f) { try { photo = await shrink(f); } catch (e) { $('save').disabled = false; return say($('msg'), 'That photo could not be read.', false); } }
+  const { error } = await db.from('memories').insert({ title, date, place: $('place').value.trim() || null, story, photo });
+  $('save').disabled = false;
+  if (error) return say($('msg'), 'Not saved: ' + error.message, false);
+  ['title', 'place', 'story', 'photo'].forEach(i => $(i).value = '');
+  $('photo').onchange();
+  pop($('save'), 14);
+  say($('msg'), 'Saved ✨ It will appear on both phones.', true);
+  await refresh(); setTimeout(() => { $('msg').textContent = ''; show(2); }, 1200);
+};
+$('in').onclick = async () => {
+  const { error } = await db.auth.signInWithPassword({ email: $('em').value.trim(), password: $('pw').value });
+  if (error) say($('lmsg'), 'Sign in failed: ' + error.message, false); else start();
+};
+$('out').onclick = async () => {
+  try { await db.auth.signOut({ scope: 'local' }); } catch (e) {}
+  try { Object.keys(localStorage).filter(k => k.startsWith('sb-')).forEach(k => localStorage.removeItem(k)); } catch (e) {}
+  location.reload();
+};
+$('t1').onclick = () => show(1); $('t2').onclick = () => show(2);
+
+async function start() {
+  const { data } = await db.auth.getSession();
+  if (!data.session) { $('login').hidden = false; $('app').hidden = true; return; }
+  $('login').hidden = true; $('app').hidden = false;
+  $('date').valueAsDate = new Date();
+  await refresh();
+  setInterval(refresh, 20000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+}
+if (SUPABASE_URL.startsWith('PASTE')) { $('login').hidden = false; say($('lmsg'), 'Setup needed: paste your Supabase URL and key at the top of the script in this file.', false); $('in').disabled = true; }
+else start();
+</script>
+</body>
+</html>
